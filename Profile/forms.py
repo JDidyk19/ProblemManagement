@@ -14,7 +14,7 @@ class UserLoginForm(forms.ModelForm):
         username = self.cleaned_data['username']
         password = self.cleaned_data['password']
         if not UserProfile.objects.filter(username=username).exists():
-            raise forms.ValidationError(f'користувач з логіном "{username} не найдено в системеі')
+            raise forms.ValidationError(f'користувач з логіном "{username} не найдено в системі')
 
         user = UserProfile.objects.filter(username=username).first()
         if user:
@@ -39,7 +39,7 @@ class UserRegistrationForm(forms.ModelForm):
         username = self.cleaned_data['username']
         if UserProfile.objects.filter(username=username).exists():
             raise forms.ValidationError(
-                f'Ім\'я {username} занйято'
+                f'Ім\'я {username} зайнято'
             )
         return username
 

@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Profile.apps.ProfileConfig',
-    'Problem.apps.ProblemConfig'
+    'Problem.apps.ProblemConfig',
+    
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

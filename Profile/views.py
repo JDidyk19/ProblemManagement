@@ -15,6 +15,24 @@ class Index(View):
             return redirect('home')  # редірект на домашню сторінку
         return render(request, 'index.html')  # якщо ні, редірект на головну сторінку
 
+class Home(View):
+
+    def get(self, request):
+        return render(request, 'home.html')
+
+class ProfileView(View):
+    """Вивід профіля користувача"""
+    def get(self, request, username):
+        if username == request.user.username: #якшо юзернейм == юзернейму залогіненому
+            user = UserProfile.objects.get(username=username)
+            context = {'user': user}
+            return render(request, 'profile/profile.html', context)
+        else:
+            return redirect('/')
+
+
+
+
 class LoginView(View):
 
     def get(self, request, *args, **kwargs):

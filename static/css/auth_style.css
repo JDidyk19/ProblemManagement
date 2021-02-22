@@ -1,14 +1,8 @@
 
 /* BASIC */
 
-html {
-  background-color: #fff;
-}
-
 body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
-
+  background-color: white;
 }
 
 a {
@@ -31,23 +25,27 @@ a {
   background-color: #ff3f3f;
 }
 
-.wrapper {
+
+.page {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: start;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
   width: 100%;
-  min-height: 100%;
-  padding: 20px;
-    overflow: hidden;
 }
 
 .formContent {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
   padding: 30px;
-  width: 90%;
+  width: 100%;
   max-width: 450px;
   position: relative;
   padding: 0px;
@@ -55,6 +53,7 @@ a {
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
 }
+
 
 .formFooter {
   display: flex;
@@ -105,7 +104,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text] {
+input[type=text], input[type=email], input[type=password] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -126,17 +125,14 @@ input[type=text] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
   background-color: #fff;
   border-bottom: 2px solid #ffa116;
 }
 
-input[type=text]:placeholder {
+input[type=text]::placeholder, input[type=email]::placeholder, input[type=password]::placeholder {
   color: #cccccc;
 }
-
-
-
 
 .underlineHover:after {
   display: block;
@@ -162,21 +158,22 @@ input[type=text]:placeholder {
     outline: none;
 }
 
-#icon {
-  width:60%;
+
+/* media */
+
+@media (max-width: 1300px) {
+  .wrapper {
+    background: red;
+  }
+
+  .alert {
+    width: 250px;
+    height: 100px;
+    margin: 0;
+  }
+
+  .formContent {
+    width: 250px;
+    height: auto;
+  }
 }
-
-@media (max-width: 1400px) {
-    .alert {
-        background-color: blue;
-    }
-
-    .formContent {
-        width: 100%;
-        max-width: 350px;
-        height: 450px;
-    }
-
-}
-
-

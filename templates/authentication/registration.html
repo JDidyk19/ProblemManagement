@@ -1,7 +1,35 @@
 {% extends 'authentication/base_authentication.html' %}
 {% load static %}
+{% load widget_tweaks %}
 {% block title %}Registration{% endblock %}
 
 {% block auth %}
+<div class="page">
 
+
+ {% if form.errors %}
+     {% for error in form.errors.values %}
+        <div class="alert" id="alert">
+            {{ error }}
+        </div>
+     {% endfor %}
+ {% endif %}
+
+      <div class="formContent">
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% render_field form.username type="text" id="password" class="second" name="login" placeholder="login"> %}
+            {% render_field form.email type="email" id="password" class="third" name="email" placeholder="email"> %}
+            {% render_field form.password type="password" id="password" class="third" name="login" placeholder="password"> %}
+          <input type="submit" class="fourth" value="Sign In">
+        </form>
+
+        <div class="formFooter">
+          <a class="underlineHover singIn" href="login">Log In</a>
+        </div>
+
+      </div>
+
+  </div>
 {% endblock %}
