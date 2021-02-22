@@ -18,7 +18,7 @@ class Index(View):
 class Home(View):
 
     def get(self, request):
-        return render(request, 'home.html')
+        return render(request, 'profile/home.html')
 
 class ProfileView(View):
     """Вивід профіля користувача"""

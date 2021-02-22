@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for problem in problems %}
+    {{ problem.name_problem }} {{ problem.difficulty }} {{ problem.number_solved }} {{ problem.reject }}
+    <a href="{% url 'delete_problem' slug=problem.slug %}"> Delete</a>
+    <br>
+{% endfor %}
+</body>
+</html>

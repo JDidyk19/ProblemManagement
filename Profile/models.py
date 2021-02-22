@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class UserProfile(AbstractUser):
-    avatar = models.ImageField(upload_to='avatar/')
+    avatar = models.ImageField(upload_to='avatar/', blank=True, null=True)
 
     class Meta:
         ordering = ['id']
