@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Problem.apps.ProblemConfig',
     
     'widget_tweaks',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
