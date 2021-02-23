@@ -1,3 +1,5 @@
+{% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +7,18 @@
     <title>Title</title>
 </head>
 <body>
+
+<form method="get">
+    <div class="form-group col-md-8">
+    {% render_field filter.form.name_pr placeholder="Name Problem" %}
+    <input type="submit" />
+    </div>
+     <div class="form-group col-md-8">
+    {% render_field filter.form.diff type='button' %}
+{#    <input type="submit" />#}
+    </div>
+</form>
+
 {% for problem in problems %}
     {{ problem.name_problem }} {{ problem.difficulty }} {{ problem.number_solved }} {{ problem.reject }}
     <a href="{% url 'delete_problem' slug=problem.slug %}"> Delete</a>

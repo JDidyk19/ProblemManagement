@@ -4,14 +4,18 @@ from django.views.generic import DetailView
 from django.views.generic.base import View
 from .models import Problems
 from .forms import ProblemCreateForm
+from .filters import ProductFilter
 # Create your views here.
 
 class MyProblemView(View):
 
     def get(self, request):
         problems = Problems.objects.filter(user=request.user)
+        filter = ProductFilter(request.GET, queryset=problems)
+        problems = filter.qs
         context = {
             'problems': problems,
+            'filter': filter,
         }
         return render(request, 'problems/problems.html', context)
 
