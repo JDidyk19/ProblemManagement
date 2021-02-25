@@ -3,6 +3,7 @@ from .models import Problems
 
 
 class ProductFilter(django_filters.FilterSet):
+
     Easy = 'Easy'
     Medium = 'Medium'
     Hard = 'Hard'
@@ -14,9 +15,9 @@ class ProductFilter(django_filters.FilterSet):
         (Hard, 'Hard'),
     ]
 
-    name_pr = django_filters.CharFilter(field_name='name_problem', lookup_expr='icontains')
-    diff = django_filters.ChoiceFilter(field_name='difficulty' ,choices=DIFFICULTY, empty_label='Difficulty')
+    name_problem = django_filters.CharFilter(field_name='name_problem', lookup_expr='icontains')
+    difficulty = django_filters.ChoiceFilter(field_name='difficulty', empty_label='Difficulty', choices=DIFFICULTY)
 
     class Meta:
         model = Problems
-        fields = ['name_pr', 'diff']
+        fields = ['name_problem', 'difficulty']

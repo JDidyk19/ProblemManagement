@@ -37,11 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'Profile.apps.ProfileConfig',
     'Problem.apps.ProblemConfig',
     
     'widget_tweaks',
     'django_filters',
+    'bootstrap_pagination',
 ]
 
 MIDDLEWARE = [

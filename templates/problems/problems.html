@@ -1,28 +1,35 @@
 {% load static %}
 {% load widget_tweaks %}
+{% load bootstrap_pagination %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
 
 <form method="get">
-    <div class="form-group col-md-8">
-    {% render_field filter.form.name_pr placeholder="Name Problem" %}
-    <input type="submit" />
-    </div>
-     <div class="form-group col-md-8">
-    {% render_field filter.form.diff type='button' %}
-{#    <input type="submit" />#}
-    </div>
+    {{ filter.form.name_problem }}
+    <input type="submit">
 </form>
 
-{% for problem in problems %}
-    {{ problem.name_problem }} {{ problem.difficulty }} {{ problem.number_solved }} {{ problem.reject }}
-    <a href="{% url 'delete_problem' slug=problem.slug %}"> Delete</a>
-    <br>
-{% endfor %}
+    <div class="container">
+        <form name="form" method="get" id="form">
+            {% render_field filter.form.difficulty onchange='this.form.submit()' %}
+        </form>
+    </div>
+
+    {% for problem in problems %}
+        <p id="text"> {{ problem.name_problem }} {{ problem.difficulty }} {{ problem.number_solved }} {{ problem.reject }}
+        </p>
+    {% endfor %}
+
+{% bootstrap_paginate problems range=1 show_prev_next="true" show_first_last="true" first_label="first" last_label="last" %}
+
+<script>
+</script>
 </body>
 </html>
