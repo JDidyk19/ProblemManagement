@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add Notate">
+</form>
+<br>
+{{ problem.name_problem }}
+
+<a href="{% url 'edit_problem' slug=problem.slug %}">Edit Problem</a>
+<br>
+<br>
+{% for notate in problem.notate_set.all %}
+    {{ notate.notate }}   <a href="{% url 'delete_notate' notate_id=notate.pk %}">Delete</a>
+    <a href="{% url 'edit_motate'  notate_id=notate.pk %}"> Edit Notate</a><br>
+    
+    {% empty %}
+    Nothing notate
+{% endfor %}
+</body>
+</html>

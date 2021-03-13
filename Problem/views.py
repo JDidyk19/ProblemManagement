@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 from django.views.generic.base import View
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .models import Problems
-from .forms import ProblemCreateForm
+from .models import Problems, Notate
+from .forms import ProblemCreateForm, AddNotateForm, ProblemEditForm, EditNotateForm
 from .filters import ProductFilter
 # Create your views here.
 
@@ -16,7 +16,7 @@ class MyProblemView(View):
         filter = ProductFilter(request.GET, queryset=problems)
         problems = filter.qs
         # Пагінація
-        paginator = Paginator(problems, 1)
+        paginator = Paginator(problems, 10)
         page = request.GET.get('page', 1)
         try:
             problems = paginator.page(page)
@@ -53,9 +53,87 @@ class AddProblemView(View):
         }
         return render(request, 'problems/add_problem.html', context)
 
+
+class DetailProblemView(View):
+
+    def get(self, request, slug):
+        form = AddNotateForm(request.POST)
+        problem = Problems.objects.get(slug=slug)
+        if problem.user.pk == request.user.pk:
+            context = {
+                'problem': problem,
+                'form' : form
+            }
+
+            return render(request, 'problems/problem_detail.html', context)
+        return redirect('problems')
+
+    def post(self, request, slug):
+        problem = Problems.objects.get(slug=slug)
+        form = AddNotateForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.problem = problem
+            form.save()
+            return redirect("problems")
+        return render(request, 'problems/problem_detail.html', {'form': form})
+
+
+class EditProblemView(View):
+
+    def get(self, request, slug):
+        problem = Problems.objects.get(slug=slug)
+        form = ProblemEditForm(instance=problem)
+        context = {
+            'editform': form
+        }
+        return render(request, 'problems/edit_problem.html', context)
+
+    def post(self, request, slug):
+        problem = Problems.objects.get(slug=slug)
+        form = ProblemEditForm(instance=problem, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('problems')
+        context = {
+            'editform': form
+        }
+        return render(request, 'problems/edit_problem.html', context)
+
+
 class DeleteProblemView(View):
 
     def get(self, request, slug):
         problem = Problems.objects.get(slug=slug)
         problem.delete()
+        return redirect('problems')
+
+
+class EditNotateView(View):
+
+    def get(self, request, notate_id):
+        notate = Notate.objects.get(pk=notate_id)
+        form = EditNotateForm(instance=notate)
+        context = {
+            'editform': form
+        }
+        return render(request, 'problems/edit_notate.html', context)
+
+    def post(self, request, notate_id):
+        notate = Notate.objects.get(pk=notate_id)
+        form = EditNotateForm(instance=notate, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('problems')
+        context = {
+            'editform': form
+        }
+        return render(request, 'problems/edit_notate.html', context)
+
+
+class DeleteNotateView(View):
+
+    def get(self, request, notate_id):
+        notate = Notate.objects.get(pk=notate_id)
+        notate.delete()
         return redirect('problems')

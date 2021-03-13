@@ -43,3 +43,15 @@ class Problems(models.Model):
         ordering = ['published']
         verbose_name = "Проблема"
         verbose_name_plural = "Проблеми"
+
+class Notate(models.Model):
+
+    problem = models.ForeignKey(Problems, on_delete=models.CASCADE)
+    notate = models.TextField()
+
+    def __str__(self):
+        return f'{self.problem.name_problem}'
+
+    class Meta:
+        verbose_name = "Нотатка"
+        verbose_name_plural = "Нотатки"

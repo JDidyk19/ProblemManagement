@@ -22,8 +22,12 @@
         </form>
     </div>
 
+<a href="{% url 'add_problem' %}"> Add Problem</a>
+
     {% for problem in problems %}
-        <p id="text"> {{ problem.name_problem }} {{ problem.difficulty }} {{ problem.number_solved }} {{ problem.reject }}
+        <p>
+        <a href="{% url 'problem' slug=problem.slug %}">{{ problem.name_problem }} {{ problem.difficulty }} {{ problem.number_solved }} {{ problem.reject }}</a>
+        <a href="{% url 'delete_problem' slug=problem.slug %}">Delete</a>
         </p>
     {% endfor %}
 
